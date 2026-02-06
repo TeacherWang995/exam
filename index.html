@@ -1,303 +1,356 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest_learning.json">
-    <meta name="theme-color" content="#5C94FC">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="images/dog.png">
-    <title>特教數位學習網｜米克師</title>
-    <meta name="description" content="專為國中特教生設計的數位學習系統。由米克師製作，提供七八九年級國文、數學、英文數位教材。">
-    <meta name="keywords" content="國中特教, 數位學習, 特教教材, 米克師, SPED">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="responsive.css">
-    <link rel="icon" type="image/png" href="images/dog.png">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest_learning.json">
+  <meta name="theme-color" content="#5C94FC">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="images/dog.png">
+  <title>特教數位學習網｜米克師</title>
+  <meta name="description" content="專為國中特教生設計的數位學習系統。由米克師製作，提供七八九年級國文、數學、英文數位教材。">
+  <meta name="keywords" content="國中特教, 數位學習, 特教教材, 米克師, SPED">
 
-    <style>
-      /* --- 遊戲標題畫面專用樣式 (Title Screen) - 保留原樣 --- */
-      #title-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: var(--bg-sky-blue, #5C94FC);
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-family: 'Press Start 2P', cursive;
-        overflow: hidden;
-       }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="icon" type="image/png" href="images/dog.png">
 
-      .block-container {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 40px;
-        animation: float 3s ease-in-out infinite;
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&family=Noto+Sans+TC&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* --- 遊戲標題畫面專用樣式 (Title Screen) - Modern Glass --- */
+    #title-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      /* 背景漸層 */
+      background: radial-gradient(circle at 10% 20%, rgb(92, 148, 252) 0%, rgb(120, 170, 255) 90%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: 'Noto Sans TC', sans-serif;
+      /* 改用現代字體 */
+      overflow: hidden;
+    }
+
+    .block-container {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 50px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .block {
+      width: 60px;
+      height: 60px;
+      /* 玻璃方塊共用樣式 */
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(5px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 磚塊改為紅色玻璃 */
+    .brick {
+      background: rgba(200, 76, 12, 0.65);
+      /* 類似磚紅色 */
+    }
+
+    /* 問號箱改為橘黃色玻璃 */
+    .question-box {
+      background: rgba(232, 156, 36, 0.7);
+      animation: blink-color 1.5s infinite alternate;
+    }
+
+    .pipe-decoration {
+      position: absolute;
+      bottom: 60px;
+      left: 10%;
+      width: 100px;
+      height: 140px;
+      /* 綠色玻璃水管 */
+      background: linear-gradient(90deg, rgba(0, 170, 0, 0.6) 0%, rgba(0, 200, 0, 0.4) 50%, rgba(0, 170, 0, 0.6) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      z-index: 1;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .pipe-decoration::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: -10px;
+      width: 120px;
+      height: 40px;
+      background: linear-gradient(90deg, rgba(0, 170, 0, 0.7) 0%, rgba(0, 200, 0, 0.5) 50%, rgba(0, 170, 0, 0.7) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+    }
+
+    .pipe-decoration.right {
+      left: auto;
+      right: 10%;
+      height: 100px;
+    }
+
+    .ground-decoration {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      /* 地板改為玻璃質感 */
+      background: rgba(200, 76, 12, 0.85);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      z-index: 2;
+    }
+
+    .game-title {
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      color: #ffffff;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      margin-bottom: 60px;
+      line-height: 1.3;
+      letter-spacing: 2px;
+      z-index: 5;
+      font-weight: 800;
+    }
+
+    .start-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1.5rem;
+      padding: 20px 60px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      text-transform: uppercase;
+      animation: pulse-btn 2s infinite ease-in-out;
+      z-index: 5;
+      position: relative;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .start-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(31, 38, 135, 0.3);
+    }
+
+    .copyright {
+      position: absolute;
+      bottom: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.8rem;
+      z-index: 10;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
       }
 
-      .block {
-        width: 50px;
-        height: 50px;
-        border: 4px solid #000;
-        box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        color: #000;
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes pulse-btn {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
       }
 
-      .brick {
-        background-color: #C84C0C; 
-        background-image: 
-             linear-gradient(45deg, transparent 48%, #000 48%, #000 52%, transparent 52%),
-             linear-gradient(-45deg, transparent 48%, #000 48%, #000 52%, transparent 52%);
-        background-size: 20px 20px;
+      70% {
+        box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
       }
 
-      .question-box {
-        background-color: #E89C24; 
-        color: #000;
-        animation: blink-color 1s steps(2, start) infinite;
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+    }
+
+    @keyframes blink-color {
+      0% {
+        background: rgba(232, 156, 36, 0.7);
       }
 
-      .pipe-decoration {
-        position: absolute;
-        bottom: 60px; 
-        left: 10%;
-        width: 80px;
-        height: 120px;
-        background: linear-gradient(to right, #00AA00 50%, #00d600 90%);
-        border: 4px solid #000;
-        z-index: 1;
+      100% {
+        background: rgba(255, 214, 119, 0.8);
       }
-      .pipe-decoration::before {
-        content: '';
-        position: absolute;
-        top: -40px;
-        left: -10px;
-        width: 100px; 
-        height: 40px;
-        background: linear-gradient(to right, #00AA00 50%, #00d600 90%);
-        border: 4px solid #000;
-      }
-      .pipe-decoration.right {
-        left: auto;
-        right: 10%;
-        height: 80px;
-       }
+    }
 
-      .ground-decoration {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 60px;
-        background-color: #C84C0C;
-        border-top: 4px solid #000;
-        background-image: 
-             linear-gradient(335deg, #000 4px, transparent 4px),
-             linear-gradient(155deg, #000 4px, transparent 4px),
-             linear-gradient(335deg, #000 4px, transparent 4px),
-             linear-gradient(155deg, #000 4px, transparent 4px);
-        background-size: 58px 58px;
-        background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
-        z-index: 2;
-      }
-
-      .game-title {
-        font-size: clamp(1.5rem, 4vw, 3.5rem);
-        color: #ffffff;
-        text-shadow: 5px 5px 0 #000000;
-        margin-bottom: 60px;
-        line-height: 1.5;
-        letter-spacing: 4px;
-        z-index: 5;
-      }
-
-      .start-btn {
-        background-color: #E89C24;
-        color: #000000;
-        font-family: 'Press Start 2P', cursive;
-        font-size: 1.2rem;
-        padding: 20px 40px;
-        border: 4px solid #000000;
-        cursor: pointer;
-        box-shadow: 8px 8px 0px #000000;
-        transition: transform 0.1s;
-        text-transform: uppercase;
-        animation: pulse-btn 1.5s infinite;
-        z-index: 5;
-        position: relative;
-      }
-
-      .start-btn:hover {
-        background-color: #FBD000;
-        transform: translateY(4px);
-        box-shadow: 4px 4px 0px #000000;
-      }
-
-      .copyright {
-        position: absolute;
-        bottom: 15px;
-        color: #ffffff;
-        font-size: 0.7rem;
-        text-shadow: 2px 2px 0 #000;
-        z-index: 10;
-      }
-
-      @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-      }
-      @keyframes pulse-btn {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-      }          
-      @keyframes blink-color {
-          0% { background-color: #E89C24; }
-          50% { background-color: #FFD677; }
-          100% { background-color: #E89C24; }
-      }
-
-      .hidden { display: none !important; }
-    </style>
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </head>
 
 <body>
   <div id="title-screen">
-      <div class="block-container">
-          <div class="block brick"></div>
-          <div class="block question-box">?</div>
-          <div class="block brick"></div>
-          <div class="block brick"></div>
-          <div class="block question-box">?</div>
-          <div class="block brick"></div>
-      </div>
+    <div class="block-container">
+      <div class="block brick"></div>
+      <div class="block question-box">?</div>
+      <div class="block brick"></div>
+      <div class="block brick"></div>
+      <div class="block question-box">?</div>
+      <div class="block brick"></div>
+    </div>
 
-      <h1 class="game-title">
-          SPED LEARNING<br>SYSTEM
-      </h1>
+    <h1 class="game-title">
+      SPED LEARNING<br>SYSTEM
+    </h1>
 
-      <button id="start-btn" class="start-btn" data-track-cat="system" data-track-lbl="enter_site">
-          PRESS START
-      </button>
+    <button id="start-btn" class="start-btn" data-track-cat="system" data-track-lbl="enter_site">
+      PRESS START
+    </button>
 
-      <div class="pipe-decoration"></div>
-      <div class="pipe-decoration right"></div>
-      <div class="ground-decoration"></div>
+    <div class="pipe-decoration"></div>
+    <div class="pipe-decoration right"></div>
+    <div class="ground-decoration"></div>
 
-      <div class="copyright">© 2025 SPEDMIX - INSERT COIN</div>
+    <div class="copyright">© 2025 SPEDMIX - INSERT COIN</div>
   </div>
 
   <div id="main-view" class="hidden">
-      <header class="navbar">
-          <div class="logo">SPED</div>
-          <nav>
-              <ul class="nav-links">
-                  <li><a href="#" onclick="location.reload()" data-track-cat="navbar_link" data-track-lbl="reload_home">HOME</a></li>
-                  <li><a href="tt.html" data-track-cat="navbar_link" data-track-lbl="emotion_log">情緒紀錄</a></li>
+    <header class="navbar">
+      <div class="logo">SPED</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#" onclick="location.reload()" data-track-cat="navbar_link" data-track-lbl="reload_home">HOME</a>
+          </li>
+          <li><a href="tt.html" data-track-cat="navbar_link" data-track-lbl="emotion_log">情緒紀錄</a></li>
 
-                  <li><a href="7.html" data-track-cat="subject_nav" data-track-lbl="g7-math">7數</a></li>
-                  <li><a href="8.html" data-track-cat="subject_nav" data-track-lbl="g8-math">8數</a></li>
-                  <li><a href="9.html" data-track-cat="subject_nav" data-track-lbl="g9-math">9數</a></li>
-                  <li><a href="7eng.html" data-track-cat="subject_nav" data-track-lbl="g7-english">7英</a></li>
-                  <li><a href="8eng.html" data-track-cat="subject_nav" data-track-lbl="g8-english">8英</a></li>
-                  <li><a href="9eng.html" data-track-cat="subject_nav" data-track-lbl="g9-english">9英</a></li>
-                  <li><a href="7ch.html" data-track-cat="subject_nav" data-track-lbl="g7-chinese">7國</a></li>
-                  <li><a href="8ch.html" data-track-cat="subject_nav" data-track-lbl="g8-chinese">8國</a></li>
-                  <li><a href="9ch.html" data-track-cat="subject_nav" data-track-lbl="g9-chinese">9國</a></li>
+          <li><a href="7.html" data-track-cat="subject_nav" data-track-lbl="g7-math">7數</a></li>
+          <li><a href="8.html" data-track-cat="subject_nav" data-track-lbl="g8-math">8數</a></li>
+          <li><a href="9.html" data-track-cat="subject_nav" data-track-lbl="g9-math">9數</a></li>
+          <li><a href="7eng.html" data-track-cat="subject_nav" data-track-lbl="g7-english">7英</a></li>
+          <li><a href="8eng.html" data-track-cat="subject_nav" data-track-lbl="g8-english">8英</a></li>
+          <li><a href="9eng.html" data-track-cat="subject_nav" data-track-lbl="g9-english">9英</a></li>
+          <li><a href="7ch.html" data-track-cat="subject_nav" data-track-lbl="g7-chinese">7國</a></li>
+          <li><a href="8ch.html" data-track-cat="subject_nav" data-track-lbl="g8-chinese">8國</a></li>
+          <li><a href="9ch.html" data-track-cat="subject_nav" data-track-lbl="g9-chinese">9國</a></li>
 
-                  <li><a href="bigtest.html" data-track-cat="category_nav" data-track-lbl="exam_prep">會考專區</a></li>
-                  <li><a href="learningstrategy.html" data-track-cat="category_nav" data-track-lbl="learning_strategy">學習策略</a></li>
-                  <li><a href="socialskill.html" data-track-cat="category_nav" data-track-lbl="social_skills">社會技巧</a></li>
-              </ul>
-          </nav>
-          <div class="menu-toggle">
-              <i class="fas fa-bars"></i>
-          </div>
-      </header>
+          <li><a href="bigtest.html" data-track-cat="category_nav" data-track-lbl="exam_prep">會考專區</a></li>
+          <li><a href="learningstrategy.html" data-track-cat="category_nav" data-track-lbl="learning_strategy">學習策略</a>
+          </li>
+          <li><a href="socialskill.html" data-track-cat="category_nav" data-track-lbl="social_skills">社會技巧</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </header>
 
-      <div class="intro-text">請選擇科目......</div>
+    <div class="intro-text">請選擇科目......</div>
 
-      <main class="button-section">
-          <div class="grade-row">
-              <a href="7ch.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g7-chinese"><i class="fas fa-book"></i> 7年級國文</a>
-              <a href="7.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g7-math"><i class="fas fa-calculator"></i> 7年級數學</a>
-              <a href="7eng.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g7-english"><i class="fas fa-language"></i> 7年級英文</a>
-          </div>
-          <div class="grade-row">
-              <a href="8ch.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g8-chinese"><i class="fas fa-book"></i> 8年級國文</a>
-              <a href="8.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g8-math"><i class="fas fa-calculator"></i> 8年級數學</a>
-              <a href="8eng.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g8-english"><i class="fas fa-language"></i> 8年級英文</a>
-          </div>
-          <div class="grade-row">
-              <a href="9ch.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g9-chinese"><i class="fas fa-book"></i> 9年級國文</a>
-              <a href="9.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g9-math"><i class="fas fa-calculator"></i> 9年級數學</a>
-              <a href="9eng.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g9-english"><i class="fas fa-language"></i> 9年級英文</a>
-          </div>
+    <main class="button-section">
+      <div class="grade-row">
+        <a href="7ch.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g7-chinese"><i
+            class="fas fa-book"></i> 7年級國文</a>
+        <a href="7.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g7-math"><i
+            class="fas fa-calculator"></i> 7年級數學</a>
+        <a href="7eng.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g7-english"><i
+            class="fas fa-language"></i> 7年級英文</a>
+      </div>
+      <div class="grade-row">
+        <a href="8ch.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g8-chinese"><i
+            class="fas fa-book"></i> 8年級國文</a>
+        <a href="8.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g8-math"><i
+            class="fas fa-calculator"></i> 8年級數學</a>
+        <a href="8eng.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g8-english"><i
+            class="fas fa-language"></i> 8年級英文</a>
+      </div>
+      <div class="grade-row">
+        <a href="9ch.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g9-chinese"><i
+            class="fas fa-book"></i> 9年級國文</a>
+        <a href="9.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g9-math"><i
+            class="fas fa-calculator"></i> 9年級數學</a>
+        <a href="9eng.html" class="big-button" data-track-cat="subject_nav" data-track-lbl="g9-english"><i
+            class="fas fa-language"></i> 9年級英文</a>
+      </div>
 
-          <div class="grade-row">
-              <a href="learningstrategy.html" class="big-button" data-track-cat="category_nav" data-track-lbl="learning_strategy"><i class="fas fa-lightbulb"></i> 學習策略</a>
-              <a href="socialskill.html" class="big-button" data-track-cat="category_nav" data-track-lbl="social_skills"><i class="fas fa-user-group"></i>社會技巧</a>
-              <a href="bigtest.html" class="big-button" data-track-cat="category_nav" data-track-lbl="exam_prep"><i class="fas fa-pen-alt"></i> 會考專區</a>
-          </div>
+      <div class="grade-row">
+        <a href="learningstrategy.html" class="big-button" data-track-cat="category_nav"
+          data-track-lbl="learning_strategy"><i class="fas fa-lightbulb"></i> 學習策略</a>
+        <a href="socialskill.html" class="big-button" data-track-cat="category_nav" data-track-lbl="social_skills"><i
+            class="fas fa-user-group"></i>社會技巧</a>
+        <a href="bigtest.html" class="big-button" data-track-cat="category_nav" data-track-lbl="exam_prep"><i
+            class="fas fa-pen-alt"></i> 會考專區</a>
+      </div>
 
-          <footer class="sticky-footer">
-            <div class="footer-left">
-              <i class="fas fa-sun"></i> 暑假倒數：<span id="days">00</span> 天
-            </div>
-            <div class="footer-center">
-               Created by 米克師
-            </div>
-            <div class="footer-right">
-              <button id="other-btn" class="footer-btn">
-                其它 <i class="fas fa-caret-up"></i>
-              </button>
-            </div>
-          </footer>
-      </main>
+      <footer class="sticky-footer">
+        <div class="footer-left">
+          <i class="fas fa-sun"></i> 暑假倒數：<span id="days">00</span> 天
+        </div>
+        <div class="footer-center">
+          Created by 米克師
+        </div>
+        <div class="footer-right">
+          <button id="other-btn" class="footer-btn">
+            其它 <i class="fas fa-caret-up"></i>
+          </button>
+        </div>
+      </footer>
+    </main>
   </div>
 
   <div id="other-modal" class="modal">
     <div class="modal-content">
       <span class="close-modal">&times;</span>
       <h2 style="text-align: center; color: #C84C0C; margin-bottom: 20px;">其它資源</h2>
-      
+
       <div class="modal-grid">
         <div class="modal-group">
-           <h3><i class="fas fa-cogs"></i> 小工具</h3>
-           <a href="https://play.blooket.com/play" target="_blank" class="btn">Blooket</a>
-           <a href="https://www.gimkit.com/join?class=60a1e3ba9eaadc0022adafb6" target="_blank" class="btn">Gimkit</a>
-           <a href="https://chuone.my.canva.site/counter" target="_blank" class="btn">計時器</a>
-           <a href="teacher.html" target="_blank" class="btn">備課幫手</a>
+          <h3><i class="fas fa-cogs"></i> 小工具</h3>
+          <a href="https://play.blooket.com/play" target="_blank" class="btn">Blooket</a>
+          <a href="https://www.gimkit.com/join?class=60a1e3ba9eaadc0022adafb6" target="_blank" class="btn">Gimkit</a>
+          <a href="https://chuone.my.canva.site/counter" target="_blank" class="btn">計時器</a>
+          <a href="teacher.html" target="_blank" class="btn">備課幫手</a>
         </div>
 
         <div class="modal-group">
-           <h3><i class="fas fa-running"></i> 基本練功</h3>
-           <a href="https://sites.google.com/view/specialchu/home?authuser=0" target="_blank" class="btn">wordwall練習</a>
-           <a href="test2.html" target="_blank" class="btn">加減法</a>
-           <a href="test.html" target="_blank" class="btn">99乘法</a>
-           <a href="math/game1.html" target="_blank" class="btn">正負數加減</a>
-           <a href="https://five-flamingo-d65.notion.site/1eb4c52ff8d08068abfbdbf7ba7bb48e" target="_blank" class="btn">基礎字練習</a>
+          <h3><i class="fas fa-running"></i> 基本練功</h3>
+          <a href="https://sites.google.com/view/specialchu/home?authuser=0" target="_blank" class="btn">wordwall練習</a>
+          <a href="test2.html" target="_blank" class="btn">加減法</a>
+          <a href="test.html" target="_blank" class="btn">99乘法</a>
+          <a href="math/game1.html" target="_blank" class="btn">正負數加減</a>
+          <a href="https://five-flamingo-d65.notion.site/1eb4c52ff8d08068abfbdbf7ba7bb48e" target="_blank"
+            class="btn">基礎字練習</a>
         </div>
 
         <div class="modal-group">
-           <h3><i class="fas fa-school"></i> 情境英文</h3>
-           <a href="https://wordwall.net/play/93118/185/701" target="_blank" class="btn">常用片語</a>
-           <a href="RPG/index.html" target="_blank" class="btn">狗子冒險去</a>
-           <a href="traveleng.html" target="_blank" class="btn">旅遊</a>
+          <h3><i class="fas fa-school"></i> 情境英文</h3>
+          <a href="https://wordwall.net/play/93118/185/701" target="_blank" class="btn">常用片語</a>
+          <a href="RPG/index.html" target="_blank" class="btn">狗子冒險去</a>
+          <a href="traveleng.html" target="_blank" class="btn">旅遊</a>
         </div>
       </div>
     </div>
@@ -308,11 +361,11 @@
 
   <script>
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw_learning.js')
-                .then(reg => console.log('學習網 PWA 註冊成功'))
-                .catch(err => console.log('註冊失敗', err));
-        });
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw_learning.js')
+          .then(reg => console.log('學習網 PWA 註冊成功'))
+          .catch(err => console.log('註冊失敗', err));
+      });
     }
 
     // Title Screen Logic
@@ -321,28 +374,28 @@
     const mainView = document.getElementById('main-view');
 
     function startGame() {
-        titleScreen.style.display = 'none';
-        mainView.classList.remove('hidden');
-        window.dispatchEvent(new Event('resize'));
+      titleScreen.style.display = 'none';
+      mainView.classList.remove('hidden');
+      window.dispatchEvent(new Event('resize'));
     }
 
     startBtn.addEventListener('click', startGame);
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && titleScreen.style.display !== 'none') {
-            startGame();
-        }
+      if (e.key === 'Enter' && titleScreen.style.display !== 'none') {
+        startGame();
+      }
     });
 
     // --- 暑假倒數計時器 (2026/7/1) ---
     const countDownDate = new Date("Jul 1, 2026 00:00:00").getTime();
 
-    const x = setInterval(function() {
+    const x = setInterval(function () {
       const now = new Date().getTime();
       const distance = countDownDate - now;
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      
+
       // 只要顯示天數
       document.getElementById("days").innerHTML = days;
 
@@ -358,21 +411,22 @@
     const closeSpan = document.getElementsByClassName("close-modal")[0];
 
     // 按下「其它」按鈕開啟
-    otherBtn.onclick = function() {
+    otherBtn.onclick = function () {
       modal.style.display = "block";
     }
 
     // 按下「X」關閉
-    closeSpan.onclick = function() {
+    closeSpan.onclick = function () {
       modal.style.display = "none";
     }
 
     // 按下視窗外部關閉
-    window.onclick = function(event) {
+    window.onclick = function (event) {
       if (event.target == modal) {
         modal.style.display = "none";
       }
     }
   </script>
 </body>
+
 </html>
