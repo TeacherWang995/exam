@@ -1,5 +1,42 @@
 /* 📱 手機版：最大寬度 768px */
 @media (max-width: 768px) {
+  
+/* 修正下拉選單容器：移除白色背景，改用適合深色選單的透明感 */
+  .nav-links .dropdown-content {
+    display: none; 
+    position: static; /* 讓它在垂直選單中撐開空間 */
+    background: rgba(255, 255, 255, 0.1) !important; /* 淡淡的玻璃底層 */
+    box-shadow: none;
+    width: 100%;
+    border-radius: 12px;
+    margin: 5px 0;
+    padding: 5px 0;
+    border: none !important;
+  }
+
+  /* 修正下拉選單內的文字：強制變白色 */
+  .nav-links .dropdown-content a {
+    color: #ffffff !important; /* 這是最重要的：強制白色 */
+    background: transparent !important;
+    padding: 12px 20px !important;
+    font-size: 16px !important;
+    text-align: center !important; /* 配合你手機版選單的置中風格 */
+    border: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  /* 當選單被點擊展開時 (.open 是我們 JS 加的) */
+  .nav-links .dropdown.open .dropdown-content {
+    display: block !important;
+  }
+
+  /* 點擊時的高亮效果 */
+  .nav-links .dropdown-content a:active {
+    background: rgba(232, 156, 36, 0.3) !important; /* 淡淡的橘色高亮 */
+    color: #FFD700 !important; /* 金色文字 */
+  }
 
   /* --- 全域調整 --- */
   body {
@@ -218,3 +255,4 @@
     font-size: 1.5rem;
   }
 }
+

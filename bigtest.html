@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,27 +11,44 @@
     <link rel="icon" href="images/dog.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-    </head>
+</head>
 
 <body>
     <header class="navbar">
         <div class="logo">SPED</div>
         <nav>
             <ul class="nav-links">
-                <li><a href="index.html" data-track-cat="navbar_link" data-track-lbl="home">HOME</a></li>
-                <li><a href="tt.html" data-track-cat="navbar_link" data-track-lbl="emotion_log">情緒紀錄</a></li>
-                <li><a href="7.html" data-track-cat="subject_nav" data-track-lbl="g7-math">7數</a></li>
-                <li><a href="8.html" data-track-cat="subject_nav" data-track-lbl="g8-math">8數</a></li>
-                <li><a href="9.html" data-track-cat="subject_nav" data-track-lbl="g9-math">9數</a></li>
-                <li><a href="7eng.html" data-track-cat="subject_nav" data-track-lbl="g7-english">7英</a></li>
-                <li><a href="8eng.html" data-track-cat="subject_nav" data-track-lbl="g8-english">8英</a></li>
-                <li><a href="9eng.html" data-track-cat="subject_nav" data-track-lbl="g9-english">9英</a></li>
-                <li><a href="7ch.html" data-track-cat="subject_nav" data-track-lbl="g7-chinese">7國</a></li>
-                <li><a href="8ch.html" data-track-cat="subject_nav" data-track-lbl="g8-chinese">8國</a></li>
-                <li><a href="9ch.html" data-track-cat="subject_nav" data-track-lbl="g9-chinese">9國</a></li>
-                <li><a href="bigtest.html" data-track-cat="category_nav" data-track-lbl="exam_prep">會考專區</a></li>
-                <li><a href="learningstrategy.html" data-track-cat="category_nav" data-track-lbl="learning_strategy">學習策略</a></li>                
-                <li><a href="socialskill.html" data-track-cat="category_nav" data-track-lbl="social_skills">社會技巧</a></li>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="tt.html">情緒紀錄</a></li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">國文 <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="7ch.html">七年級</a><a href="8ch.html">八年級</a><a href="9ch.html">九年級</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">數學 <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="7.html">七年級</a><a href="8.html">八年級</a><a href="9.html">九年級</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">英文 <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="7eng.html">七年級</a><a href="8eng.html">八年級</a><a href="9eng.html">九年級</a>
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn" style="color: #FFD700;">特需課程 <i
+                            class="fas fa-star"></i></a>
+                    <div class="dropdown-content">
+                        <a href="socialskill.html"><i class="fas fa-user-group"></i> 社會技巧</a>
+                        <a href="learningstrategy.html"><i class="fas fa-lightbulb"></i> 學習策略</a>
+                        <a href="bigtest.html"><i class="fas fa-pen-alt"></i> 會考專區</a>
+                    </div>
+                </li>
             </ul>
         </nav>
         <div class="menu-toggle">
@@ -40,30 +58,36 @@
 
     <div class="section-title text-lg font-bold">
         <i class="fas fa-compass mr-2"></i> 會考專區
-    </div>      
-    
+    </div>
+
     <div class="single-row">
         <div class="social-group">
             <h3 style="text-align: center;"><i class="fas fa-pen-alt"></i>國文</h3>
             <div class="btn-group">
-                <a href="https://sites.google.com/view/specialchu/%E5%9C%8B%E6%96%87/%E6%9C%83%E8%80%83%E5%9C%8B%E6%96%87" target="_blank" class="btn" data-track-cat="resource_link" data-track-lbl="exam-chinese-main">國文</a>
+                <a href="https://sites.google.com/view/specialchu/%E5%9C%8B%E6%96%87/%E6%9C%83%E8%80%83%E5%9C%8B%E6%96%87"
+                    target="_blank" class="btn" data-track-cat="resource_link" data-track-lbl="exam-chinese-main">國文</a>
             </div>
-        </div> 
+        </div>
 
         <div class="social-group">
             <h3 style="text-align: center;"><i class="fas fa-pen-alt"></i>數學</h3>
             <div class="btn-group">
-                <a href="https://mathvideo.hle.com.tw/CAP/" target="_blank" class="btn" data-track-cat="resource_link" data-track-lbl="exam-math-videos">會考影片</a>
-                <a href="https://five-flamingo-d65.notion.site/mathreview" target="_blank" class="btn" data-track-cat="resource_link" data-track-lbl="exam-math-level_b">達B</a>
-                <a href="https://five-flamingo-d65.notion.site/1d84c52ff8d080f1938defa776fd04f2" target="_blank" class="btn" data-track-cat="resource_link" data-track-lbl="exam-math-basics">基礎概念</a>
+                <a href="https://mathvideo.hle.com.tw/CAP/" target="_blank" class="btn" data-track-cat="resource_link"
+                    data-track-lbl="exam-math-videos">會考影片</a>
+                <a href="https://five-flamingo-d65.notion.site/mathreview" target="_blank" class="btn"
+                    data-track-cat="resource_link" data-track-lbl="exam-math-level_b">達B</a>
+                <a href="https://five-flamingo-d65.notion.site/1d84c52ff8d080f1938defa776fd04f2" target="_blank"
+                    class="btn" data-track-cat="resource_link" data-track-lbl="exam-math-basics">基礎概念</a>
             </div>
-        </div>   
+        </div>
 
         <div class="social-group">
             <h3 style="text-align: center;"><i class="fas fa-pen-alt"></i>英文</h3>
             <div class="btn-group">
-                <a href="bigtesteng/bigtesteng.html" target="_blank" class="btn" data-track-cat="resource_link" data-track-lbl="exam-eng-113-1_10">113 1-10</a>
-                <a href="https://wordwall.net/play/91954/593/594" target="_blank" class="btn" data-track-cat="resource_link" data-track-lbl="exam-eng-113-1_10_vocab">113 1-10單字</a>
+                <a href="bigtesteng/bigtesteng.html" target="_blank" class="btn" data-track-cat="resource_link"
+                    data-track-lbl="exam-eng-113-1_10">113 1-10</a>
+                <a href="https://wordwall.net/play/91954/593/594" target="_blank" class="btn"
+                    data-track-cat="resource_link" data-track-lbl="exam-eng-113-1_10_vocab">113 1-10單字</a>
             </div>
         </div>
     </div>
@@ -75,4 +99,5 @@
     <br>
     <p style="display: inline;">Created by 米克師</p>
 </footer>
+
 </html>

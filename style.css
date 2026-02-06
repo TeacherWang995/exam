@@ -405,6 +405,46 @@ footer p {
     padding: 0 10px;
 }
 
+/* 下拉選單基礎樣式 */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  z-index: 1000;
+  top: 100%;
+}
+
+.dropdown-content a {
+  color: #333 !important; /* 電腦版維持深色 */
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #f0f0f0;
+  opacity: 1; /* 確保透明度為 1 */
+  visibility: visible; /* 確保可見 */
+}
+
+.dropdown-content a:hover {
+  background-color: #5C94FC;
+  color: white !important;
+}
+
+/* 懸浮顯示 */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
 @keyframes typing {
     from {
         width: 0;

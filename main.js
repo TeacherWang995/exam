@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 1. 手機版漢堡選單邏輯
+// 1. 手機版漢堡選單邏輯
 function initMobileMenu() {
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -22,12 +23,37 @@ function initMobileMenu() {
             navLinks.classList.toggle('active');
         });
 
-        // 點擊外部關閉選單
+        // --- 新增：手機版下拉選單點擊邏輯 ---
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(drop => {
+            const dropBtn = drop.querySelector('.dropbtn');
+            if (dropBtn) {
+                dropBtn.addEventListener('click', (e) => {
+                    // 只在手機版寬度時觸發點擊展開
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault(); // 防止 javascript:void(0) 可能引發的跳轉
+                        e.stopPropagation();
+                        
+                        // 切換目前點擊的下拉選單
+                        drop.classList.toggle('open');
+                        
+                        // (選配) 關閉其他已經打開的下拉選單 (手風琴效果)
+                        dropdowns.forEach(other => {
+                            if (other !== drop) other.classList.remove('open');
+                        });
+                    }
+                });
+            }
+        });
+
+        // 點擊外部關閉選單 (包含漢堡選單本身與展開的下拉內容)
         document.addEventListener('click', (e) => {
             if (navLinks.classList.contains('active') && 
                 !navLinks.contains(e.target) && 
                 !menuToggle.contains(e.target)) {
                 navLinks.classList.remove('active');
+                // 關閉選單時，順便把所有展開的下拉項也收起來
+                document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
             }
         });
     }
